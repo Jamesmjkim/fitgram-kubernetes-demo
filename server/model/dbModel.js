@@ -9,6 +9,12 @@ const databaseParams = {
   password: process.env.RDS_PASSWORD,
   port: process.env.RDS_PORT,
 };
+// const databaseParams = {
+//   user: 'jamesk',
+//   host: 'localhost',
+//   database: 'postgres',
+//   port: 5432,
+// };
 
 const pool = new Pool(databaseParams);
 

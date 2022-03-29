@@ -115,6 +115,13 @@ ALTER TABLE public.messages ADD CONSTRAINT "messages_fk1" FOREIGN KEY ("recepien
 ALTER TABLE public.sessions ADD CONSTRAINT "sessions_fk0" FOREIGN KEY ("user_id") REFERENCES public.users("id");
 
 
+INSERT INTO public.workouts ("id", "name", "description") VALUES (1, 'Push up', 'Upper-body');
+INSERT INTO public.workouts ("id", "name", "description") VALUES (2, 'Pull up', 'Upper-body');
+INSERT INTO public.workouts ("id", "name", "description") VALUES (3, 'Squat', 'Lower-body');
+INSERT INTO public.workouts ("id", "name", "description") VALUES (4, 'Deadlift', 'Lower-body');
+INSERT INTO public.workouts ("id", "name", "description") VALUES (5, 'Crunches', 'Core');
+INSERT INTO public.workouts ("id", "name", "description") VALUES (6, 'Running', 'Whole Body');
+
 
 
 
