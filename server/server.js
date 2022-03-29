@@ -15,6 +15,7 @@ const routineRouter = require('./routes/routines.js');
 const forumRouter = require('./routes/forums.js');
 const commentsRouter = require('./routes/comments.js');
 const workoutRouter = require('./routes/workouts.js');
+const { node } = require('webpack');
 
 sessionClear();
 
@@ -28,6 +29,11 @@ app.use('/routine', routineRouter);
 app.use('/forum', forumRouter);
 app.use('/comments', commentsRouter);
 app.use('/workout', workoutRouter);
+
+app.use(express.static(path.resolve(__dirname, '../build')));
+app.get('/', (req, res) => {
+  return res.sendFile(path.resolve(__dirname, '../build', 'index.html'));
+});
 
 app.post(
   '/api/google-auth',
