@@ -5,14 +5,14 @@ metadata:
   labels:
     app: fitgram
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: fitgram
   template:
     metadata:
       labels:
-        app: figram
+        app: fitgram
     spec:
       containers:
         - name: fitgram
@@ -22,12 +22,30 @@ spec:
             - containerPort: 3000
           env:
             - name: RDS_USERNAME
-              value: jamesk
+              value: 'jamesk'
             - name: RDS_HOSTNAME
-              value: localhost
+              value: 'localhost'
             - name: RDS_DBNAME
-              value: postgres
+              value: 'postgres'
             - name: RDS_PASSWORD
-              value: admin
+              value: 'admin'
             - name: RDS_PORT
-              value: 5432
+              value: '5432'
+            - name: PORT
+              value: '3000'
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: fitgram-service
+  labels:
+    app: fitgram
+spec:
+  type: LoadBalancer
+  selector:
+    app: fitgram
+  ports:
+    - protocol: TCP
+      port: 3000
+      targetPort: 3000
+      nodePort: 30010
