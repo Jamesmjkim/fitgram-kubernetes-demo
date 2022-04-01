@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fitgram-deployment
+  labels:
+    app: fitgram
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: fitgram
+  template:
+    metadata:
+      labels:
+        app: figram
+    spec:
+      containers:
+        - name: fitgram
+          image: jamesmjkim/fitgram-app:1.0
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 3000
+          env:
+            - name: RDS_USERNAME
+              value: jamesk
+            - name: RDS_HOSTNAME
+              value: localhost
+            - name: RDS_DBNAME
+              value: postgres
+            - name: RDS_PASSWORD
+              value: admin
+            - name: RDS_PORT
+              value: 5432
