@@ -30,10 +30,12 @@ app.use('/forum', forumRouter);
 app.use('/comments', commentsRouter);
 app.use('/workout', workoutRouter);
 
-app.use(express.static(path.resolve(__dirname, '../build')));
-app.get('/', (req, res) => {
-  return res.sendFile(path.resolve(__dirname, '../build', 'index.html'));
-});
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.resolve(__dirname, '../build')));
+  app.get('/*', (req, res) => {
+    return res.sendFile(path.resolve(__dirname, '../build', 'index.html'));
+  });
+}
 
 app.post(
   '/api/google-auth',

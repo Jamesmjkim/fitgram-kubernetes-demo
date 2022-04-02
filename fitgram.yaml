@@ -33,6 +33,8 @@ spec:
               value: '5432'
             - name: PORT
               value: '3000'
+            - name: NODE_ENV
+              value: production
 ---
 apiVersion: v1
 kind: Service
