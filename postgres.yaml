@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgres
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgres
+  template:
+    metadata:
+      labels:
+        app: postgres
+    spec:
+      containers:
+        - name: postgres
+          image: jamesmjkim/fitgram-database:1.0
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 5432
+          env:
+            - name: POSTGRES_DB
+              value: 'postgresdb'
+            - name: POSTGRES_USER
+              value: 'jamesk'
+            - name: POSTGRES_PASSWORD
+              value: 'admin'
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: pg-service
+  labels:
+    app: postgres
+spec:
+  type: ClusterIP
+  ports:
+    - port: 5432
+  selector:
+    app: postgres

@@ -22,13 +22,13 @@ spec:
             - containerPort: 3000
           env:
             - name: RDS_USERNAME
-              value: 'jamesk'
+              value: jamesk
             - name: RDS_HOSTNAME
-              value: 'localhost'
+              value: pg-service
             - name: RDS_DBNAME
-              value: 'postgres'
+              value: postgresdb
             - name: RDS_PASSWORD
-              value: 'admin'
+              value: admin
             - name: RDS_PORT
               value: '5432'
             - name: PORT
