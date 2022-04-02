@@ -1,82 +1,104 @@
-
-
-CREATE TABLE public.comments (
-    id integer NOT NULL,
-    owner_user_id integer NOT NULL,
-    forum_id integer NOT NULL,
-    description text,
-    date_created timestamp with time zone DEFAULT now(),
-	CONSTRAINT "comments_pk" PRIMARY KEY ("id")
+CREATE TABLE public.users (
+	"id" serial NOT NULL,
+	"user_name" TEXT NOT NULL,
+	"first_name" TEXT NOT NULL,
+	"last_name" TEXT NOT NULL,
+	"email" TEXT NOT NULL,
+	"height" float8,
+	"weight" float8,
+	"password" TEXT NOT NULL,
+	CONSTRAINT "users_pk" PRIMARY KEY ("id")
+) WITH (
+  OIDS=FALSE
 );
 
-CREATE TABLE public.forums (
-    id integer NOT NULL,
-    owner_user_id integer NOT NULL,
-    routine_id integer NOT NULL,
-    name text,
-    likes integer DEFAULT 0,
-    dislikes integer DEFAULT 0,
-    date_created timestamp with time zone DEFAULT now(),
-	CONSTRAINT "forums_pk" PRIMARY KEY ("id")
+
+
+CREATE TABLE public.workouts (
+	"id" serial NOT NULL,
+	"name" TEXT NOT NULL,
+	"description" TEXT NOT NULL,
+	CONSTRAINT "workouts_pk" PRIMARY KEY ("id")
+) WITH (
+  OIDS=FALSE
 );
 
-CREATE TABLE public.messages (
-    id integer NOT NULL,
-    sender_id integer NOT NULL,
-    recepient_id integer NOT NULL,
-    description text,
-    date_created timestamp with time zone DEFAULT now()
+
+
+CREATE TABLE public.routines (
+	"id" serial NOT NULL,
+	"owner_user_id" int NOT NULL,
+	"name" TEXT NOT NULL,
+	"duration" int NOT NULL,
+	CONSTRAINT "routines_pk" PRIMARY KEY ("id")
+) WITH (
+  OIDS=FALSE
 );
+
 
 
 CREATE TABLE public.routine_workout (
-    id integer NOT NULL,
-    routine_id integer NOT NULL,
-    workout_id integer NOT NULL,
-    set integer,
-    repetition_motion integer,
-    day text,
+	"id" serial NOT NULL,
+	"routine_id" int NOT NULL,
+	"workout_id" int NOT NULL,
+	"set" int,
+	"repetition_motion" int,
+	"day" int,
+	"weight" int,
 	CONSTRAINT "routine_workout_pk" PRIMARY KEY ("id")
+) WITH (
+  OIDS=FALSE
 );
 
-CREATE TABLE public.routines (
-    id integer NOT NULL,
-    owner_user_id integer NOT NULL,
-    name text NOT NULL,
-    duration integer,
-	CONSTRAINT "routines_pk" PRIMARY KEY ("id")
 
+
+CREATE TABLE public.forums(
+	"id" serial NOT NULL,
+	"owner_user_id" int NOT NULL,
+	"routine_id" int NOT NULL,
+	"name" TEXT NOT NULL,
+	"likes" int NOT NULL,
+	"dislikes" int NOT NULL,
+	"date_created" TIMESTAMP NOT NULL,
+	CONSTRAINT "forums_pk" PRIMARY KEY ("id")
+) WITH (
+  OIDS=FALSE
+);
+
+
+
+CREATE TABLE public.comments (
+	"id" serial NOT NULL,
+	"owner_user_id" int NOT NULL,
+	"forum_id" int NOT NULL,
+	"description" TEXT NOT NULL,
+	"date_created" TIMESTAMP NOT NULL,
+	CONSTRAINT "comments_pk" PRIMARY KEY ("id")
+) WITH (
+  OIDS=FALSE
+);
+
+CREATE TABLE public.messages (
+	"id" serial,
+	"sender_id" int NOT NULL,
+	"recepient_id" int NOT NULL,
+	"description" TEXT NOT NULL,
+	"date_created" TIMESTAMP NOT NULL
+) WITH (
+  OIDS=FALSE
 );
 
 
 CREATE TABLE public.sessions (
-    id integer NOT NULL,
-    token text NOT NULL,
-    user_id integer NOT NULL,
-    date_created timestamp with time zone DEFAULT now(),
+	"id" serial NOT NULL,
+	"token" TEXT NOT NULL,
+	"user_id" int NOT NULL,
+	"date_created" TIMESTAMP NOT NULL,
 	CONSTRAINT "sessions_pk" PRIMARY KEY ("id")
+) WITH (
+  OIDS=FALSE
 );
 
-CREATE TABLE public.users (
-    id integer NOT NULL,
-    user_name text NOT NULL,
-    first_name text NOT NULL,
-    last_name text NOT NULL,
-    email text NOT NULL,
-    height double precision,
-    weight double precision,
-    password text NOT NULL,
-	CONSTRAINT "users_pk" PRIMARY KEY ("id")
-
-);
-
-CREATE TABLE public.workouts (
-    id integer NOT NULL,
-    name text NOT NULL,
-    description text NOT NULL,
-	CONSTRAINT "workouts_pk" PRIMARY KEY ("id")
-
-);
 
 ALTER TABLE public.routines ADD CONSTRAINT "routines_fk0" FOREIGN KEY ("owner_user_id") REFERENCES public.users("id");
 
@@ -101,6 +123,8 @@ INSERT INTO public.workouts ("id", "name", "description") VALUES (3, 'Squat', 'L
 INSERT INTO public.workouts ("id", "name", "description") VALUES (4, 'Deadlift', 'Lower-body');
 INSERT INTO public.workouts ("id", "name", "description") VALUES (5, 'Crunches', 'Core');
 INSERT INTO public.workouts ("id", "name", "description") VALUES (6, 'Running', 'Whole Body');
+
+
 
 
 
