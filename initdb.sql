@@ -1,7 +1,7 @@
 
 
 CREATE TABLE public.comments (
-    id integer NOT NULL,
+    id serial NOT NULL,
     owner_user_id integer NOT NULL,
     forum_id integer NOT NULL,
     description text,
@@ -10,7 +10,7 @@ CREATE TABLE public.comments (
 );
 
 CREATE TABLE public.forums (
-    id integer NOT NULL,
+    id serial NOT NULL,
     owner_user_id integer NOT NULL,
     routine_id integer NOT NULL,
     name text,
@@ -21,7 +21,7 @@ CREATE TABLE public.forums (
 );
 
 CREATE TABLE public.messages (
-    id integer NOT NULL,
+    id serial NOT NULL,
     sender_id integer NOT NULL,
     recepient_id integer NOT NULL,
     description text,
@@ -30,17 +30,18 @@ CREATE TABLE public.messages (
 
 
 CREATE TABLE public.routine_workout (
-    id integer NOT NULL,
+    id serial NOT NULL,
     routine_id integer NOT NULL,
     workout_id integer NOT NULL,
     set integer,
     repetition_motion integer,
+    weight integer,
     day text,
 	CONSTRAINT "routine_workout_pk" PRIMARY KEY ("id")
 );
 
 CREATE TABLE public.routines (
-    id integer NOT NULL,
+    id serial NOT NULL,
     owner_user_id integer NOT NULL,
     name text NOT NULL,
     duration integer,
@@ -50,7 +51,7 @@ CREATE TABLE public.routines (
 
 
 CREATE TABLE public.sessions (
-    id integer NOT NULL,
+    id serial NOT NULL,
     token text NOT NULL,
     user_id integer NOT NULL,
     date_created timestamp with time zone DEFAULT now(),
@@ -58,7 +59,7 @@ CREATE TABLE public.sessions (
 );
 
 CREATE TABLE public.users (
-    id integer NOT NULL,
+    id serial NOT NULL,
     user_name text NOT NULL,
     first_name text NOT NULL,
     last_name text NOT NULL,
@@ -71,7 +72,7 @@ CREATE TABLE public.users (
 );
 
 CREATE TABLE public.workouts (
-    id integer NOT NULL,
+    id serial NOT NULL,
     name text NOT NULL,
     description text NOT NULL,
 	CONSTRAINT "workouts_pk" PRIMARY KEY ("id")
