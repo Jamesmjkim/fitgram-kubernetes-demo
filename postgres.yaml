@@ -6,11 +6,11 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: postgres
+      db: postgres
   template:
     metadata:
       labels:
-        app: postgres
+        db: postgres
     spec:
       containers:
         - name: postgres
@@ -31,11 +31,11 @@ kind: Service
 metadata:
   name: pg-service
   labels:
-    app: postgres
+    db: postgres
 spec:
   type: ClusterIP
   ports:
-    - port: 5432
+    - port: 5555
       targetPort: 5432
   selector:
-    app: postgres
+    db: postgres
